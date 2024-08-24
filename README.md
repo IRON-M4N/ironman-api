@@ -1,6 +1,10 @@
 ![Furina](https://i.imgur.com/mgvEIuY.jpg)
 
-# Installation
+# Ironman-API
+
+An API package providing various utilities, including media downloading and processing features.
+
+## Installation
 
 You can install `ironman-api` using npm:
 
@@ -10,63 +14,109 @@ npm install ironman-api
 
 ## Features
 
-* [Pinterest](#pinterest)
-* [Genshin Character Info](#genshinCH)
+- [Pinterest Downloader](#pinterest)
+- [MediaFire Downloader](#mediafire)
+- [Telegraph Uploader](#telegraph)
+- [TikTok Downloader](#tiktok)
+- [Uguu Uploader](#fileuguu)
+- [M3U8 Converter](#m3u8)
 
 ## Pinterest <a name="pinterest"></a>
 
+Download media from Pinterest.
+
 ```js
-const { pinterestdl } = require('ironman-api');
+const { pinterest } = require('ironman-api');
+//import { pinterest } from 'ironman-api';
 
 (async () => {
-  console.log(await pinterestdl('https://in.pinterest.com/pin/617204323960160868/'));
+  console.log(await pinterest('https://in.pinterest.com/pin/617204323960160868/'));
 })();
 ```
 _You can use [pin.it](https://pin.it) and [in.pinterest.com](https://in.pinterest.com) URLs._
 
-#### Output
-```json
-{
-   "ironman":{
-      "url":"https://i.pinimg.com/736x/11/3a/4a/113a4af38e8eae9b500457071986782e.jpg",
-      "title":"胡宮 -Komiya- (@komiya_latte) on X",
-      "type":"image",
-      "Creator":"IRON-M4N",
-      "description":"劇場 "
-   }
-}
-```
+## MediaFire <a name="mediafire"></a>
 
-------
-
-## Genshin Character Info <a name="genshinCH"></a>
+Download files from MediaFire.
 
 ```js
-const { genshinCH } = require('ironman-api');
+const { mediafire } = require('ironman-api');
+//import { mediafire } from 'ironman-api';
 
 (async () => {
-  const characterDetails = await genshinCH('furina');// Genshin Impact Character names
-  console.log(characterDetails);
+  console.log(await mediafire('https://www.mediafire.com/xyz.zip'));
 })();
 ```
-#### Output
+
+## Telegraph <a name="telegraph"></a>
+
+Upload images to Telegraph.
+
 ```js
-{
-   "name":"Furina",
-   "title":"Endless Solo of Solitude",
-   "vision":"Hydro",
-   "weapon":"Sword",
-   "gender":"Female",
-   "nation":"Fontaine",
-   "affiliation":"Court of Fontaine",
-   "rarity":5,
-   "release":"2023-11-08",
-   "constellation":"Animula Choragi",
-   "birthday":"0000-10-13",
-   "description":"The absolute focus of the stage of judgment, until the final applause sounds."}
-//and more...
+const { telegraph } = require('ironman-api');
+//import { telegraph } from 'ironman-api';
+
+(async () => {
+  console.log(await telegraph('./img.png'));
+})();
 ```
------
+
+## TikTok <a name="tiktok"></a>
+
+Download videos from TikTok.
+
+```js
+const { tiktok } = require('ironman-api');
+//import { tiktok } from 'ironman-api';
+
+(async () => {
+  console.log(await tiktok('https://www.tiktok.com/videourl'));
+})();
+```
+
+## File Uploader to Uguu <a name="fileuguu"></a>
+
+Upload images to Uguu .
+
+```js
+const { fileUguu } = require('ironman-api');
+//import { fileUguu } from 'ironman-api';
+
+(async () => {
+  console.log(await fileUguu('./img.png'));
+})();
+```
+
+## M3U8 Converter <a name="m3u8"></a>
+
+M3U8 to MP4
+
+```js
+const { m3u8 } = require('ironman-api');
+//import { m3u8 } from 'ironman-api';
+
+const convert = new m3u8();
+convert.InputFile('https://file.m3u8') //also can be a path
+             .OutputFile('./output.mp4') //default is output.mp4
+             //.UseCLI(true); if you want to process it using CLI
+             .start({
+                onStart: () => console.log('Processing started...'),
+                onEnd: () => console.log('Processing finished!')
+             });
+```
+Complete `start` options
+
+```js
+.start({
+    onStart: () => console.log('Processing started...'),
+    onEnd: () => console.log('Processing finished!'),
+    onProgress: (progress) => console.log(`Progress: ${progress}`),
+    onStderr: (stderr) => console.error(`Error: ${stderr}`),
+    onCodecData: (data) => console.log(`Codec Data: ${data}`),
+    onError: (error) => console.error(`Error: ${error}`)
+});
+```
+------
 
 ### Coming Soon
 
