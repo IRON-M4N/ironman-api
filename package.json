@@ -1,9 +1,16 @@
 {
   "name": "ironman-api",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "An npm with some features.",
   "main": "index.js",
-  "type": "module",
+  "module": "index.mjs",
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.js"
+    }
+  },
   "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
